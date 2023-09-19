@@ -11,8 +11,6 @@
 ;; You should have received a copy of the GNU General Public License along with this program. 
 ;; If not, see <https://www.gnu.org/licenses/>.
 
-
-
 (use-modules (gnu))
 (use-service-modules desktop networking ssh xorg)
 (use-package-modules admin)
@@ -91,21 +89,25 @@
                ;; Pay attention to your boot config, may not be like this for your setup
                 (targets (list "/dev/sda"))
                 (keyboard-layout keyboard-layout)))
-
+;; I assume and encrypted setup that requires mapping and
+;; Double checks you know the unlock password for LUKS encrypted drive.
+;; If you want to encrypt outside the VM use instructions below.
   (mapped-devices (list (mapped-device
                           (source (uuid
-                                   "[your root image UUID]"))
+                                   "[your root partition UUID]"))
                           (target "cryptroot")
                           (type luks-device-mapping))))
-
-  ;; The list of file systems that get "mounted".  The unique
-  ;; file system identifiers there ("UUIDs") can be obtained
-  ;; by running 'blkid' in a terminal.
+;; In order to not use LUKS in VM encryption remove the "mapped-devices" config above this line. 
+;; Remove (dependencies mapped-devices) from (file-system ... )
+;; Replace "/dev/mapper/cryptroot" using the /dev/sda# or (uuid ...) for your root directory's partition.
+;; These are the file systems that get "mounted".  The unique file system identifiers 
+;; ("UUIDs") can be obtained by running 'blkid' in a terminal.
   (file-systems (cons* 
 			(file-system
                          (mount-point "/")
                          (device "/dev/mapper/cryptroot")
                          (type "ext4")
-                         (dependencies mapped-devices)) 
+                         (dependencies mapped-devices)
+			 ) 
 		%base-file-systems)))
        
