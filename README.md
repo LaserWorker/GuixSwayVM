@@ -22,7 +22,7 @@ You could download the "GNU Guix 1.4.0 QEMU Image" to skip some steps.
 
 
 Second make a virtual drive with "qemu-img create" like this:  
->qemu-img create -f qcow2 newdriveimage.img 20G
+> $ qemu-img create -f qcow2 newdriveimage.img 20G
 
 
 that is:
@@ -42,17 +42,19 @@ And, YES we will be using a bash or other terminal A LOT for this GuixSwayVM.
 
 ### Use the required QEMU options and arguments
 Use the "qemu-system-x86_64" command with arguments like this:
-> qemu-system-x86_64 -m 8192 -smp 1\
-> -enable-kvm -boot menu=on \
-> -hda file=/Directory/of/Image.qcow2 \
-> -virtfs local,path="/Directory/to/share",security_model=none,mount_tag="TAGkeepidfortracking"  \
+> $ qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm \
+>   -boot menu=on,order=d -nic user,model=virtio-net-pci \
+>   -drive media=disk,index=0,file=/Directory/of/newdriveimage.img \
+>   -virtfs local,path="/Directory/to/share",security_model=none,mount_tag="TAGkeepidfortracking"  \
 
 
-that is: Build a 64bit system with 8GB of ram and one cpu core...
+that is: Build a 64bit system with 8GB of ram and one cpu core and use the host's virtual tools...
 
 
-use the host's virtual tools, use the boot menu
+use the boot menu with "d" order, apply a network interface card for the user that is a "virtio-net-pci" model.
 
 
 have a drive avalible for mount "hda" file that is the virtual drive or read only iso
 
+
+Only use the virtfs to quickly load files into the VM don't use that option frequently.
