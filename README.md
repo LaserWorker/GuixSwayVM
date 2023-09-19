@@ -14,7 +14,7 @@
 
 
 
-### If you have never used Guix before ... 
+### If you have never used Guix before well ...
 First things first Download the image from: guix.gnu.org/en/download/
 For the sake of using the Guix install I'm getting the "GNU Guix System 1.4.0" x86_64 Desktop Installer image.
 You could download the "GNU Guix 1.4.0 QEMU Image" to skip some steps.
@@ -48,6 +48,7 @@ Use the "qemu-system-x86_64" command with arguments like this:
 $ qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm \  
       -boot menu=on,order=d -nic user,model=virtio-net-pci \  
       -drive media=disk,index=0,file=/Directory/of/newdriveimage.img \  
+      -drive media=cdrom,file=/Directory/of/guix-system-install-1.4.0.x86_64-linux.iso \ 
       -virtfs local,path="/Directory/to/share",security_model=none,mount_tag="TAGkeepidfortracking"
 ```
 
@@ -57,7 +58,20 @@ that is: Build a 64bit system with 8GB of ram and one cpu core and use the host'
 use the boot menu with "d" order, apply a network interface card for the user that is a "virtio-net-pci" model.
 
 
-have a drive avalible for mount "hda" file that is the virtual drive or read only iso
+have a drive avalible for mount "/dev/sda" file that is the virtual drive or read only iso
+
+
+have a drive avalible for mount "/dev/cdrom" to load the install iso when running the first time.
 
 
 Only use the virtfs to quickly load files into the VM don't use that option frequently.
+
+
+
+### Use the guided install provided by Guix minimizing software selection 
+Do the general install as provided by Guix, but when it comes to the GUI/compositor/WM selection part make sure none are selected.
+Then after reboot you can login as root and change the systems' /etc/config.scm to the one provided in this repository. And run:
+```Bash
+$ guix system reconfigure /etc/config.scm
+```
+But Hold Up! If you don't know what ^this does let me walk you through it all more theroughly.
