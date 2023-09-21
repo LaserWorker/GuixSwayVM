@@ -56,6 +56,7 @@
                         (specification->package "eglexternalplatform")
                         (specification->package "elogind")
                         (specification->package "midori")
+                        (specification->package "kitty")
 
 ;; Packages you might want later
 ;;                      (specification->package "ungoogled-chromium-wayland")
