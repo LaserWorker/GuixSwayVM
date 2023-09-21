@@ -22,13 +22,13 @@
   (host-name "GuixVM")
 
 ;; In case you are missing the key group... Don't Forget
-;; (groups (cons* (user-group (name "seat")) 
-;;		%base-groups))
+ (groups (cons* (user-group (name "seat")) 
+		%base-groups))
 ;; This should be fixxed by seatd-service-type ... if not un-comment
  
 ;; The list of user accounts ('root' is implicit).
   (users (cons* (user-account
-                  (name "myname")
+                  (name "name")
                   (comment "AboutMe")
                   (group "users")
                   (home-directory "/home/name")
