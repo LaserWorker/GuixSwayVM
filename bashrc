@@ -8,6 +8,9 @@ if [ ! -d "${XDG_RUNTIME_DIR}" ]; then
 else
   echo "XDG runtime directory is working... is sway already running?";
 fi
+if [ ! -d "${WLR_RENDERER_ALLOW_SOFTWARE}" ]; then
+  export WLR_RENDERER_ALLOW_SOFTWARE=1;
+fi
 if [[ ${XDG_RUNTIME_DIR} == "fail" ]]; then
   export XDG_RUNTIME_DIR="/tmp/${UID}-runtime-dir";
   mkdir ${XDG_RUNTIME_DIR};
