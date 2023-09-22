@@ -24,7 +24,7 @@
 ;; In case you are missing the key group... Don't Forget
  (groups (cons* (user-group (name "seat")) 
 		%base-groups))
-;; This should be fixxed by seatd-service-type ... if not un-comment
+;; This should be fixxed by seatd-service-type ... if so comment out or remove
  
 ;; The list of user accounts ('root' is implicit).
   (users (cons* (user-account
@@ -79,7 +79,20 @@
 ;; You may require a WPA suplicant and network manager of other kinds 
                  (service ntp-service-type)
                  (service gpm-service-type)
-                 (service seatd-service-type) 
+                 (service seatd-service-type
+			  (group
+				"seat")
+			  (socket
+				"/run/seatd.sock")
+			  (logfile
+				"/var/log/seatd.log")
+			  (loglevel
+				"error")
+;;			  "silent")
+;;			  "error")
+;;			  "info")
+;;			  "debug")
+			  ) 
 	)
 
 ;; This is the default list of services we are appending to.
