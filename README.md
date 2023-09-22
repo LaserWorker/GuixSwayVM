@@ -23,7 +23,7 @@ You could download the "GNU Guix 1.4.0 QEMU Image" to skip some steps.
 
 Second make a virtual drive with "qemu-img create" like this:  
 ```Bash
-$ qemu-img create -f qcow2 newdriveimage.img 20G 
+qemu-img create -f qcow2 newdriveimage.img 20G
 ```
 
 
@@ -45,10 +45,10 @@ And, YES we will be using a bash or other terminal A LOT for this GuixSwayVM.
 ### Use the required QEMU options and arguments
 Use the "qemu-system-x86_64" command with arguments like this:
 ```Bash
-$ qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm \  
-      -boot menu=on,order=d -nic user,model=virtio-net-pci \  
-      -drive media=disk,index=0,file=/Directory/of/newdriveimage.img \  
-      -drive media=cdrom,file=/Directory/of/guix-system-install-1.4.0.x86_64-linux.iso \ 
+qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm \
+      -boot menu=on,order=d -nic user,model=virtio-net-pci \
+      -drive media=disk,index=0,file=/Directory/of/newdriveimage.img \
+      -drive media=cdrom,file=/Directory/of/guix-system-install-1.4.0.x86_64-linux.iso \
       -virtfs local,path="/Directory/to/share",security_model=none,mount_tag="TAGkeepidfortracking"
 ```
 
@@ -72,6 +72,6 @@ Only use the virtfs to quickly load files into the VM don't use that option freq
 Do the general install as provided by Guix, but when it comes to the GUI/compositor/WM selection part make sure none are selected.
 Then after reboot you can login as root and change the systems' /etc/config.scm to the one provided in this repository. And run:
 ```Bash
-$ guix system reconfigure /etc/config.scm
+guix system reconfigure /etc/config.scm
 ```
 But Hold Up! If you don't know what ^this does let me walk you through it all more theroughly.
