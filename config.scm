@@ -56,7 +56,7 @@
                         (specification->package "eglexternalplatform")
                         (specification->package "elogind")
                         (specification->package "midori")
-                        (specification->package "kitty")
+                        (specification->package "st")
 
 ;; Packages you might want later
 ;;                      (specification->package "ungoogled-chromium-wayland")
@@ -80,14 +80,14 @@
                  (service ntp-service-type)
                  (service gpm-service-type)
                  (service seatd-service-type
-			  (group
-				"seat")
-			  (socket
-				"/run/seatd.sock")
-			  (logfile
-				"/var/log/seatd.log")
-			  (loglevel
-				"error")
+;;			  (group
+;;				"seat")
+;;			  (socket
+;;				"/run/seatd.sock")
+;;			  (logfile
+;;				"/var/log/seatd.log")
+;;			  (loglevel
+;;				"error")
 ;;			  "silent")
 ;;			  "error")
 ;;			  "info")
