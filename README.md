@@ -45,7 +45,7 @@ And, YES we will be using a bash or other terminal A LOT for this GuixSwayVM.
 ### Use the required QEMU options and arguments
 Use the "qemu-system-x86_64" command with arguments like this:
 ```Bash
-qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm \
+qemu-system-x86_64 -m 8192 -smp 1 -enable-kvm -vga virtio\
       -boot menu=on,order=d -nic user,model=virtio-net-pci \
       -drive media=disk,index=0,file=/Directory/of/newdriveimage.img \
       -drive media=cdrom,file=/Directory/of/guix-system-install-1.4.0.x86_64-linux.iso \
