@@ -11,6 +11,13 @@
 
 ### Use a virtual machine to build this
  --- As noted in the config.scm this does not include sufficent network drivers. I'll try to get a Guix Sway going for the Desktop, but two key things to consider if I do; It won't be smaller that 10GB and It won't work on all desktops (you will need to consider things like hardware, processor and BIOS boot structure).
+ --- Run your VM on a ramdisk with commands like this: 
+```Bash
+mkdir ~/ramdisk
+mount -o size=12G -t tmpfs none ~/ramdisk -o user=username
+```
+ 
+
 
 
 
